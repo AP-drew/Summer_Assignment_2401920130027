@@ -1,0 +1,50 @@
+// Maximum Subarray
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int current= nums[0];
+        int maxSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            current = Math.max(nums[i], current + nums[i]);
+            maxSum = Math.max(maxSum, current);
+        }
+
+        return maxSum;
+    }
+}
+
+// Contains Duplicate
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i + 1]) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+}
+
+//maximum average subarray I
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        int max = sum;
+
+        for (int i = k; i < nums.length; i++) {
+            sum = sum - nums[i - k] + nums[i];
+
+            if (sum > max) {
+                max = sum;
+            }
+        }
+
+        return (double) max / k;
+    }
+} 
+
