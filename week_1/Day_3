@@ -1,0 +1,57 @@
+// Move Zeroes
+class Solution {
+    public void moveZeroes(int[] nums) {
+
+        int index = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+
+                int temp = nums[index];
+                nums[index] = nums[i];
+                nums[i] = temp;
+
+                index++;
+            }
+        }
+    }
+}
+
+// Squares of a Sorted Array
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] * nums[i];
+        }
+        Arrays.sort(nums);
+        return nums;
+    }
+}
+
+// Container With Most Water
+class Solution {
+    public int maxArea(int[] height) {
+
+        int left = 0;
+        int right = height.length - 1;
+        int maxArea = 0;
+
+        while (left < right) {
+
+            int width = right - left;
+            int area = Math.min(height[left], height[right]) * width;
+
+            if (area > maxArea) {
+                maxArea = area;
+            }
+
+            if (height[left] < height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        return maxArea;
+    }
+}
