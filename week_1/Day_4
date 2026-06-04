@@ -1,0 +1,100 @@
+// 1572. Matrix Diagonal Sum
+class Solution {
+    public int diagonalSum(int[][] mat){
+       int n=mat.length;
+        int sum=0;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(i==j || (i+j)==(n-1))
+                {
+                    sum+=mat[i][j];
+                }
+            }
+        }
+       
+        return sum;
+    }
+}
+
+// 566. Reshape the Matrix
+class Solution {
+    public int[][] matrixReshape(int[][] mat, int r, int c) {
+        int m = mat.length;
+        int n = mat[0].length;
+        if (m * n != r * c) {
+            return mat;
+        }
+        int[][] ans = new int[r][c];
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                ans[row][col] = mat[i][j];
+                col++;
+                if (col == c) {
+                    col = 0;
+                    row++;
+                }
+            }
+        }
+        return ans;
+    }
+}
+// 54. Spiral Matrix
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+
+        List<Integer> ans = new ArrayList<>();
+
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        boolean[][] vis = new boolean[m][n];
+
+        int i = 0, j = 0;
+        int dir = 0; // 0=right, 1=down, 2=left, 3=up
+
+        for (int k = 0; k < m * n; k++) {
+
+            ans.add(matrix[i][j]);
+            vis[i][j] = true;
+
+            if (dir == 0) {
+                if (j + 1 < n && !vis[i][j + 1]) {
+                    j++;
+                } else {
+                    dir = 1;
+                    i++;
+                }
+            }
+            else if (dir == 1) {
+                if (i + 1 < m && !vis[i + 1][j]) {
+                    i++;
+                } else {
+                    dir = 2;
+                    j--;
+                }
+            }
+            else if (dir == 2) {
+                if (j - 1 >= 0 && !vis[i][j - 1]) {
+                    j--;
+                } else {
+                    dir = 3;
+                    i--;
+                }
+            }
+            else {
+                if (i - 1 >= 0 && !vis[i - 1][j]) {
+                    i--;
+                } else {
+                    dir = 0;
+                    j++;
+                }
+            }
+        }
+
+        return ans;
+    }
+}
