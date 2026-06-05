@@ -1,0 +1,61 @@
+// 125. Valid Palindrome
+
+class Solution {
+    public boolean isPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+
+            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
+                left++;
+            }
+
+            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+                right--;
+            }
+
+            if (Character.toLowerCase(s.charAt(left)) !=
+                Character.toLowerCase(s.charAt(right))) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+
+// 344. Reverse String
+public class Solution {
+    public void reverseString(char[] s) {
+        char[] tmp = new char[s.length];
+        for (int i = s.length - 1, j = 0; i >= 0; i--, j++) {
+            tmp[j] = s[i];
+        }
+        for (int i = 0; i < s.length; i++) {
+            s[i] = tmp[i];
+        }
+    }
+}
+
+// 14. Longest Common Prefix
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String pref = strs[0];
+
+        for (int i = 1; i < strs.length; i++) {
+            while (!strs[i].startsWith(pref)) {
+                pref = pref.substring(0, pref.length() - 1);
+
+                if (pref.isEmpty()) {
+                    return "";
+                }
+            }
+        }
+
+        return pref;
+    }
+}
