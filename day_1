@@ -1,0 +1,61 @@
+// Valid Anagram
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        char[] a = s.toCharArray();
+        char[] b = t.toCharArray();
+
+        Arrays.sort(a);
+        Arrays.sort(b);
+
+        return Arrays.equals(a, b);
+    }
+}
+
+// 387. First Unique Character in a String
+class Solution {
+    public int firstUniqChar(String s) {
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (s.indexOf(ch) == s.lastIndexOf(ch)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+}
+
+// 383. Ransom Note
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        
+        char[] r = ransomNote.toCharArray();
+        char[] m = magazine.toCharArray();
+
+        Arrays.sort(r);
+        Arrays.sort(m);
+
+        int i = 0, j = 0;
+
+        while (i < r.length && j < m.length) {
+            if (r[i] == m[j]) {
+                i++;
+                j++;
+            } else if (r[i] > m[j]) {
+                j++;
+            } else {
+                return false;
+            }
+        }
+
+        return i == r.length;
+    }
+}
