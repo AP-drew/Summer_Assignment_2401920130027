@@ -1,0 +1,101 @@
+// 3. Longest Substring Without Repeating Characters
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashSet<Character> set = new HashSet<>();
+
+        int left = 0;
+        int maxLen = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            while (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+
+            set.add(s.charAt(right));
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
+
+// 567. Permutation in String
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int len1 = s1.length();
+        int len2 = s2.length();
+        if (len1 > len2) {
+            return false;
+        }
+
+        int[] map1 = new int[26];
+        int[] map2 = new int[26];
+
+        for (int i = 0; i < len1; i++) {
+            map1[s1.charAt(i) - 'a']++;
+            map2[s2.charAt(i) - 'a']++;
+        }
+
+        if (java.util.Arrays.equals(map1, map2)) {
+            return true;
+        }
+
+        for (int i = len1; i < len2; i++) {
+            map2[s2.charAt(i) - 'a']++;
+            map2[s2.charAt(i - len1) - 'a']--;
+
+            if (java.util.Arrays.equals(map1, map2)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+// 438. Find All Anagrams in a String
+
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> ans = new ArrayList<>();
+
+        int n = s.length();
+        int m = p.length();
+
+        if (m > n) {
+            return ans;
+        }
+
+        int[] freqP = new int[26];
+        int[] freqS = new int[26];
+
+        for (int i = 0; i < m; i++) {
+            freqP[p.charAt(i) - 'a']++;
+            freqS[s.charAt(i) - 'a']++;
+        }
+
+        for (int i = 0; i <= n - m; i++) {
+
+            boolean same = true;
+            for (int j = 0; j < 26; j++) {
+                if (freqP[j] != freqS[j]) {
+                    same = false;
+                    break;
+                }
+            }
+
+            if (same) {
+                ans.add(i);
+            }
+
+            if (i + m < n) {
+                freqS[s.charAt(i) - 'a']--;
+                freqS[s.charAt(i + m) - 'a']++;
+            }
+        }
+
+        return ans;
+    }
+}
+

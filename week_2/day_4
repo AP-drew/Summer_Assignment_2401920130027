@@ -1,0 +1,91 @@
+
+// 557. Reverse Words in a String III   
+class Solution {
+    public String reverseWords(String s) {
+        char[] arr = s.toCharArray();
+
+        int start = 0;
+
+        for (int i = 0; i <= arr.length; i++) {
+            if (i == arr.length || arr[i] == ' ') {
+                int left = start;
+                int right = i - 1;
+
+                while (left < right) {
+                    char temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+
+                    left++;
+                    right--;
+                }
+
+                start = i + 1;
+            }
+        }
+
+        return new String(arr);
+    }
+}
+
+// 394. Decode String
+class Solution {
+    int i = 0;
+
+    public String decodeString(String s) {
+        String ans = "";
+
+        while (i < s.length() && s.charAt(i) != ']') {
+
+            if (Character.isLetter(s.charAt(i))) {
+                ans += s.charAt(i);
+                i++;
+            }
+            else if (Character.isDigit(s.charAt(i))) {
+
+                int num = 0;
+
+                while (Character.isDigit(s.charAt(i))) {
+                    num = num * 10 + (s.charAt(i) - '0');
+                    i++;
+                }
+
+                i++;
+
+                String str = decodeString(s);
+
+                i++; 
+
+                for (int j = 0; j < num; j++) {
+                    ans += str;
+                }
+            }
+        }
+
+        return ans;
+    }
+}
+// 22. Generate Parentheses
+class Solution {
+    List<String> ans = new ArrayList<>();
+
+    public List<String> generateParenthesis(int n) {
+        generate("", 0, 0, n);
+        return ans;
+    }
+
+    public void generate(String current, int open, int close, int n) {
+        if (current.length() == 2 * n) {
+            ans.add(current);
+            return;
+        }
+
+        if (open < n) {
+            generate(current + "(", open + 1, close, n);
+        }
+
+        if (close < open) {
+            generate(current + ")", open, close + 1, n);
+        }
+    }
+}
