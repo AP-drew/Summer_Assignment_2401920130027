@@ -1,0 +1,48 @@
+import java.util.HashSet;
+// Definition for singly-linked list.
+class Solution {
+    public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> set = new HashSet<>();
+
+        while (head != null) {
+            if (set.contains(head)) {
+                return true;
+            }
+
+            set.add(head);
+            head = head.next;
+        }
+
+        return false;
+    }
+}
+//206. Reverse Linked List
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode newHead = null;
+
+        while (head != null) {
+            ListNode node = new ListNode(head.val);
+            node.next = newHead;
+            newHead = node;
+
+            head = head.next;
+        }
+
+        return newHead;
+    }
+}
+//876. Middle of the Linked List
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+}
