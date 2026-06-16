@@ -1,0 +1,97 @@
+//merge linked list
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+
+        ListNode dummy = new ListNode(-1);
+        ListNode current = dummy;
+
+        while (list1 != null && list2 != null) {
+
+            if (list1.val <= list2.val) {
+                current.next = list1;
+                list1 = list1.next;
+            } else {
+                current.next = list2;
+                list2 = list2.next;
+            }
+
+            current = current.next;
+        }
+
+        if (list1 != null) {
+            current.next = list1;
+        }
+
+        if (list2 != null) {
+            current.next = list2;
+        }
+
+        return dummy.next;
+    }
+}
+
+//remove nth node
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+
+        ListNode fast = dum;
+        ListNode slow = dum;
+
+        for (int i = 0; i <= n; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
+
+        return dum.next;
+    }
+}
+//palindrome ll
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode prev = null;
+        ListNode curr = slow;
+
+        while (curr != null) {
+            ListNode next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        ListNode first = head;
+        ListNode second = prev;
+
+        while (second != null) {
+            if (first.val != second.val) {
+                return false;
+            }
+
+            first = first.next;
+            second = second.next;
+        }
+
+        return true;
+    }
+}
