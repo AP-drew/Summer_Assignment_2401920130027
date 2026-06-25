@@ -1,0 +1,56 @@
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        while (root != null) {
+            if (root.val == val) {
+                return root;
+            }
+            else if (val < root.val) {
+                root = root.left;
+            }
+            else {
+                root = root.right;
+            }
+        }
+
+        return null;
+    }
+}
+
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return valid(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean valid(TreeNode node, long min, long max) {
+        if (node == null) {
+            return true;
+        }
+
+        if (node.val <= min || node.val >= max) {
+            return false;
+        }
+
+        return valid(node.left, min, node.val) &&
+               valid(node.right, node.val, max);
+    }
+}
+
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+        while (root != null) {
+
+            if (p.val < root.val && q.val < root.val) {
+                root = root.left;
+            }
+            else if (p.val > root.val && q.val > root.val) {
+                root = root.right;
+            }
+            else {
+                return root;
+            }
+        }
+
+        return null;
+    }
+}
