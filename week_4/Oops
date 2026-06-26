@@ -1,0 +1,134 @@
+// Interface
+interface Test {
+    int square(int num);
+}
+
+// Implementation
+class Arithmetic implements Test {
+    @Override
+    public int square(int num) {
+        return num * num;
+    }
+}
+
+// Usage
+class ToTestInt {
+    public static void main(String[] args) {
+        Arithmetic arithmetic = new Arithmetic();
+        System.out.println("Square of 5: " + arithmetic.square(5));
+    }
+}
+
+
+// Outer class
+class Outer {
+    void display() {
+        System.out.println("Outer class display method");
+    }
+
+    // Inner class
+    class Inner {
+        void display() {
+            System.out.println("Inner class display method");
+        }
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.display();
+
+        Outer.Inner inner = outer.new Inner();
+        inner.display();
+    }
+}
+
+
+class Point {
+    private int x, y;
+
+    // Constructors
+    public Point() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    // Methods
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void setXY(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+}
+
+// Example usage
+class Main {
+    public static void main(String[] args) {
+        Point point = new Point(5, 10);
+        System.out.println("X: " + point.getX() + ", Y: " + point.getY());
+        point.setXY(20, 30);
+        System.out.println("X: " + point.getX() + ", Y: " + point.getY());
+    }
+}
+
+// Base class
+class Box {
+    protected int length, breadth;
+
+    public Box(int length, int breadth) {
+        this.length = length;
+        this.breadth = breadth;
+    }
+
+    public int getArea() {
+        return length * breadth;
+    }
+}
+
+// Subclass
+class Box3D extends Box {
+    private int height;
+
+    public Box3D(int length, int breadth, int height) {
+        super(length, breadth);
+        this.height = height;
+    }
+
+    public int getVolume() {
+        return length * breadth * height;
+    }
+}
+
+// Example usage
+class Main {
+    public static void main(String[] args) {
+        Box box = new Box(5, 10);
+        System.out.println("Area: " + box.getArea());
+
+        Box3D box3D = new Box3D(5, 10, 15);
+        System.out.println("Area: " + box3D.getArea());
+        System.out.println("Volume: " + box3D.getVolume());
+    }
+}
